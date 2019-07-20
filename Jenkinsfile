@@ -25,21 +25,21 @@ node {
   try {
       _pipelineNotify()
 
-      stage "Checkout" {
+      stage 'Checkout' {
       checkout scm
       checkout([$class: 'GitSCM', branches: [[name: '*/openwrt-19.07']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])
       sh "ls -lah"
       }
       
-      stage "Grab Feeds" {
+      stage 'Grab Feeds' {
       sh label: 'Feeds', returnStdout: true, script: './scripts/feeds install -a'
       }
           
-      stage "Build" {
+      stage 'Build' {
       sh "make V=s"
       }
       
-      stage "Archive" {
+      stage 'Archive' {
       archive 'output/**/*'
       }
   }
