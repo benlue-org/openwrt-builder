@@ -25,6 +25,7 @@ node {
   try {
       _pipelineNotify()
 
+      /*
       stage "Checkout"
         checkout scm
         checkout([$class: 'GitSCM', branches: [[name: '*/openwrt-19.07']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])
@@ -45,7 +46,7 @@ node {
       stage "Build"
         sh "make clean"
         sh "make -j4 V=s"
-
+      */
       stage "Archive"
         archive 'output/**/*'
   }
