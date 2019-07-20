@@ -31,11 +31,11 @@ node {
         sh "ls -lah"
       
       stage "Feeds"
-        sh "rm feeds.conf"
+        sh "rm -f feeds.conf"
         sh "wget https://raw.githubusercontent.com/benlue-org/openwrt-builder/master/feeds/feeds.conf"
         sh label: 'Feeds Update', returnStdout: true, script: './scripts/feeds update -a'
         sh label: 'Feeds Install', returnStdout: true, script: './scripts/feeds install -a'
-        sh "rm .config"
+        sh "rm -f .config"
         sh "wget https://raw.githubusercontent.com/benlue-org/openwrt-builder/master/profiles/ar71xx/tlwdr4300v1/diffconfig"
         sh "mv diffconfig .config"
         sh "echo CONFIG_TARGET_ar71xx_generic_DEVICE_tl-wdr4300-v1=y"
