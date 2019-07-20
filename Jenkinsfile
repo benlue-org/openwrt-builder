@@ -36,7 +36,6 @@ node {
         sh label: 'Feeds Update', returnStdout: true, script: './scripts/feeds update -a'
         sh label: 'Feeds Install', returnStdout: true, script: './scripts/feeds install -a'
         sh "rm -f .config"
-        sh "rm -f diffconfig.1"
         sh "rm -f diffconfig"
         sh "wget https://raw.githubusercontent.com/benlue-org/openwrt-builder/master/profiles/ar71xx/tlwdr4300v1/diffconfig"
         sh "mv diffconfig .config"
