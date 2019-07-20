@@ -19,13 +19,6 @@ def _pipelineNotify(String buildStatus = 'STARTED') {
         color = 'RED'
         colorCode = '#FF0000'
     }
-
-    try {
-        mattermostSend (color: colorCode, message: summary)
-    }
-    catch (e) {
-        echo 'Unable to sent Mattermost notification'
-    }
 }
 
 node {
