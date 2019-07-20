@@ -31,10 +31,11 @@ node {
       sh "ls -lah"
       
       stage 'Grab Feeds'
-      sh "./scripts/feeds update -a"
+      sh label: 'Feeds', returnStdout: true, script: './scripts/feeds install -a'
+      #sh "./scripts/feeds update -a"
       
       stage 'Install Feeds'
-      sh "./scripts/feeds install -a"
+      #sh "./scripts/feeds install -a"
       
       stage 'Build'
       sh "make V=s"
