@@ -27,6 +27,9 @@ node {
 
       stage 'Checkout'
       checkout scm
+      
+      stage 'Openwrt Source'
+      checkout([$class: 'GitSCM', branches: [[name: '*/openwrt-19.07']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])
 
       stage 'Build'
       sh "make V=s"
