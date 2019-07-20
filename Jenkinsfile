@@ -31,7 +31,6 @@ node {
       sh "ls -lah"
       
       stage 'Grab Feeds'
-      sh "cd openwrt"
       sh "./scripts/feeds update -a"
       
       stage 'Install Feeds'
