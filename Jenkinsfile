@@ -48,7 +48,7 @@ node {
 //        sh "make -j4 V=s"
 
       stage "Archive"
-        archiveArtifacts 'bin/targets/**/*'
+        archiveArtifacts 'bin/targets/**/*.bin'
   }
   catch (e) {
       currentBuild.result = "FAILED"
