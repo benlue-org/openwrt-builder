@@ -35,7 +35,8 @@ node {
                   doGenerateSubmoduleConfigurations: false,
                   extensions: [[$class: 'CleanBeforeCheckout']],
                   submoduleCfg: [],
-                  userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])  
+                  userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]
+                ])  
           
         //git url: 'https://github.com/openwrt/openwrt.git', branch "${params.branch}"
         //checkout scm
