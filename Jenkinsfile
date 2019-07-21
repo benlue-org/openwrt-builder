@@ -45,7 +45,7 @@ node {
       }
       
       stage('Feeds') {
-        sh "mv feeds.conf feeds.conf.old"
+        //sh "mv feeds.conf feeds.conf.old"
         sh "wget https://raw.githubusercontent.com/benlue-org/openwrt-builder/master/feeds/feeds.conf"
         sh label: 'Feeds Update', returnStdout: true, script: './scripts/feeds update -a'
         sh label: 'Feeds Install', returnStdout: true, script: './scripts/feeds install -a'
