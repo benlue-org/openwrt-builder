@@ -32,7 +32,7 @@ node {
         sh "ls -lah"
       }
       
-      stage "Feeds"
+      stage('Feeds') {
         sh "rm -f feeds.conf"
         sh "wget https://raw.githubusercontent.com/benlue-org/openwrt-builder/master/feeds/feeds.conf"
         sh label: 'Feeds Update', returnStdout: true, script: './scripts/feeds update -a'
@@ -43,13 +43,16 @@ node {
         sh "mv diffconfig .config"
         sh "echo CONFIG_TARGET_ar71xx_generic_DEVICE_tl-wdr4300-v1=y"
         sh "make defconfig"
+      }
       
-      stage "Build"
-//        sh "make clean"
+      stage('Build') {
+//      sh "make clean"
         sh "make -j4 V=s"
-
-      stage "Archive"
+      }
+      
+      stage('Archive') {
         archiveArtifacts 'bin/targets/**/**/*.bin'
+      }
   }
   catch (e) {
       currentBuild.result = "FAILED"
