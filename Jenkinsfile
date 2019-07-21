@@ -28,7 +28,7 @@ node {
 
       stage('Checkout') {
         checkout scm
-        checkout([$class: 'GitSCM', branches: [[name: '*/openwrt-19.07']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])
+        checkout([$class: 'GitSCM', branches: [[name: '*/openwrt-18.06']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])
         sh "ls -lah"
       }
       
