@@ -30,7 +30,12 @@ node {
 
       stage('SCM Checkout') {
         echo "Pulling changes from branch ${params.branch}"
-        checkout([$class: 'GitSCM', branches: [[name: '${params.branch}']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])  
+        checkout([$class: 'GitSCM',
+                  branches: [[name: "${params.branch}"]],
+                  doGenerateSubmoduleConfigurations: false,
+                  extensions: [[$class: 'CleanBeforeCheckout']],
+                  submoduleCfg: [],
+                  userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])  
           
         //git url: 'https://github.com/openwrt/openwrt.git', branch "${params.branch}"
         //checkout scm
