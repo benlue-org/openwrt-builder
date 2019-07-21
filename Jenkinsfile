@@ -46,8 +46,10 @@ node {
       }
       
       stage('Build') {
-//      sh "make clean"
-        sh "make -j4 V=s"
+        //sh "make clean"
+        sh label: 'Make Clean', returnStdout: true, script: 'make clean'
+        sh label: 'Build Process', returnStdout: true, script: 'make -j1 V=s'
+        //sh "make -j4 V=s"
       }
       
       stage('Archive') {
