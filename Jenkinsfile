@@ -21,16 +21,18 @@ def _pipelineNotify(String buildStatus = 'STARTED') {
     }
 }
 
-properties([parameters([choice(choices: ['master', 'openwrt-18.06', 'openwrt-19.07'], description: 'Select Branch to Build', name: 'Branch')]), [$class: 'JiraProjectProperty'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1d']])])
+properties([parameters([choice(choices: ['master', 'openwrt-18.06', 'openwrt-19.07'], description: 'Select Branch to Build', name: 'branch')]), [$class: 'JiraProjectProperty'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1d']])])
 
 node {
   try {
       _pipelineNotify()
 
 
-      stage('Checkout') {
-        checkout scm
-        checkout([$class: 'GitSCM', branches: [[name: '*/openwrt-18.06']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])
+      stage('SCM Checkout') {
+        echo "Pulling changes from branch ${params.branch}"
+        git url: 'https://github.com/openwrt/openwrt.git', branch "${params.branch}"
+        //checkout scm
+        //checkout([$class: 'GitSCM', branches: [[name: '*/openwrt-18.06']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])
         sh "ls -lah"
       }
       
