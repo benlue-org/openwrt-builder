@@ -26,10 +26,11 @@ node {
       _pipelineNotify()
 
 
-      stage "Checkout"
+      stage('Checkout') {
         checkout scm
         checkout([$class: 'GitSCM', branches: [[name: '*/openwrt-19.07']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])
         sh "ls -lah"
+      }
       
       stage "Feeds"
         sh "rm -f feeds.conf"
