@@ -42,11 +42,6 @@ node {
                   submoduleCfg: [],
                   userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]
                 ])  
-          
-        //git url: 'https://github.com/openwrt/openwrt.git', branch "${params.branch}"
-        //checkout scm
-        //checkout([$class: 'GitSCM', branches: [[name: '*/openwrt-18.06']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]])
-        sh "ls -lah"
       }
       
       stage('Feeds') {
@@ -63,7 +58,6 @@ node {
       }
       
       stage('Build') {
-        //sh "make clean"
         sh label: 'Make Clean', returnStdout: true, script: 'make clean'
         sh label: 'Build Process', returnStdout: true, script: 'make -j1 V=sc'
       }
