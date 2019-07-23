@@ -43,18 +43,21 @@ node {
                   userRemoteConfigs: [[url: 'https://github.com/openwrt/openwrt.git']]
                 ])  
       }
-      
-      stage('Feeds') {
+ 
+      stage('Update Feeds') {
         //sh "mv feeds.conf feeds.conf.old"
         sh "wget https://raw.githubusercontent.com/benlue-org/openwrt-builder/master/feeds/feeds.conf"
         sh label: 'Feeds Update', returnStdout: true, script: './scripts/feeds update -a'
-        sh label: 'Feeds Install', returnStdout: true, script: './scripts/feeds install -a'
+      }
+     
+      stage ('Install Feeds') {
+	sh label: 'Feeds Install', returnStdout: true, script: './scripts/feeds install -a'
         sh "rm -f .config"
         sh "rm -f diffconfig"
         sh "wget https://raw.githubusercontent.com/benlue-org/openwrt-builder/master/profiles/ar71xx/tlwdr4300v1/diffconfig"
         sh "mv diffconfig .config"
         sh "echo CONFIG_TARGET_ar71xx_generic_DEVICE_tl-wdr4300-v1=y"
-        sh "make defconfig"
+        sh "make defconfig"	  
       }
       
       stage('Build') {
