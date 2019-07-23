@@ -62,7 +62,7 @@ node {
       
       stage('Build') {
         //sh label: 'Make Clean', returnStdout: true, script: 'make clean'
-        sh label: 'Build Process', returnStdout: true, script: 'make -j99 V=sc'
+        sh label: 'Build Process', returnStdout: true, script: 'make -j1 V=sc'
       }
       
       stage('Archive') {
