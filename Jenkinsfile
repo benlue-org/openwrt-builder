@@ -21,13 +21,12 @@ def _pipelineNotify(String buildStatus = 'STARTED') {
     }
 }
 
-properties([parameters([choice(choices: ['master', 'openwrt-18.06', 'openwrt-19.07', 'develop'],
-                   description: 'Select Branch to Build',
-                   name: 'branch')]),
-                   [$class: 'JiraProjectProperty'],
-                   pipelineTriggers([[$class: 'PeriodicFolderTrigger',
-                   interval: '1d']])
-           ])
+properties([parameters([choice(choices: ['TL-WDR4300v1', 'TL-MR3020v1', 'TL-WR1043NDv1'], description: 'Select your device to build', name: 'device'), 
+						choice(choices: ['master', 'openwrt-18.06', 'openwrt-19.07', 'develop'], description: 'Select your Branch to buils', name: 'branch'), 
+						choice(choices: ['test1', 'test2', 'test3', 'test4'], description: 'Treffe deine Auswahl für Build 3', name: 'test'),
+						booleanParam(defaultValue: true, description: 'Willst du ein clean build?', name: 'make clean')]), [$class: 'JiraProjectProperty'], pipelineTriggers([[$class: 'PeriodicFolderTrigger', interval: '1d']
+						])
+])
 
 node {
   try {
