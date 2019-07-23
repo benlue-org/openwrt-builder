@@ -66,7 +66,7 @@ node {
         //sh "make clean"
         sh label: 'Make Clean', returnStdout: true, script: 'make clean'
 	sh label: 'Make Info', returnStdout: true, script: 'make info'      
-        sh label: 'Build Process', returnStdout: true, script: 'make -j1 V=s'
+        sh label: 'Build Process', returnStdout: true, script: 'make -j1 V=sc'
         //sh "make -j4 V=s"
       }
       
